@@ -1,8 +1,10 @@
+export interface InvariantFailCustomInfo {
+  readonly failMessage: string,
+  readonly [key: string]: any;
+}
+
 export interface InvariantFail {
-  readonly data: {
-    readonly failMessage: string,
-    [key: string]: any;
-  }
+  readonly customInfo: Array<InvariantFailCustomInfo>;
   readonly path?: string;
 }
 
@@ -27,10 +29,10 @@ export const success = (): Success => ({
 /**
  * Creates Fail Invariant;
  */
-export const fail = (failData: InvariantFail['data']): Fail => ({
+export const fail = (customInfo: InvariantFailCustomInfo): Fail => ({
   _tag: 'Fail',
   fail: {
-    data: failData,
+    customInfo: new Array<InvariantFailCustomInfo>(customInfo),
   }
 } as const)
 
