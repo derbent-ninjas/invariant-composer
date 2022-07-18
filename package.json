@@ -4,7 +4,7 @@
   "description": "Useful tools for validation by composing invariants",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
