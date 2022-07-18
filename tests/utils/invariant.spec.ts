@@ -11,13 +11,13 @@ describe('Invariant', () => {
     {
       toString: () => 'isFail for Fail - should return true',
       predicate: isFail,
-      invariant: fail({ failMessage: 'some message' }),
+      invariant: fail({ message: 'some message' }),
       expectedPredicateResult: true,
     },
     {
       toString: () => 'isSuccess for Fail - should return false',
       predicate: isSuccess,
-      invariant: fail({ failMessage: 'some message' }),
+      invariant: fail({ message: 'some message' }),
       expectedPredicateResult: false,
     },
     {
@@ -32,34 +32,106 @@ describe('Invariant', () => {
     expect(predicate(invariant)).toStrictEqual(expectedPredicateResult);
   })
 
-  const factoriesTestCases = [
+  const failFactoryTestCases = [
+    // Fail
     {
       toString: () => 'fail(object) - should properly create fail invariant',
-      passedInfo: { failMessage: 'fail 1' } as InvariantFailCustomInfo,
+      passedInfo: { message: 'fail 1' } as InvariantFailCustomInfo,
       expectedInvariant: {
-        _tag: 'Fail',
-        fail: {
-          customInfo: [{
-            failMessage: 'fail 1',
-          }],
-        },
-      } as Fail,
+        ...fail({ message: 'fail 1' }),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+        ],
+      },
     },
     {
       toString: () => 'fail(array) - should properly create fail invariant',
-      passedInfo: [{ failMessage: 'fail 1' }] as InvariantFailCustomInfo[],
+      passedInfo: [{ message: 'fail 1' }] as InvariantFailCustomInfo[],
       expectedInvariant: {
-        _tag: 'Fail',
-        fail: {
-          customInfo: [{
-            failMessage: 'fail 1',
-          }],
-        },
-      } as Fail,
-    }
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+        ],
+      },
+    },
   ]
 
-  test.each(factoriesTestCases)('%s', ({ passedInfo, expectedInvariant }) => {
-    expect(fail(passedInfo)).toStrictEqual(expectedInvariant);
+  test.each(failFactoryTestCases)('%s', ({ passedInfo, expectedInvariant }) => {
+    expect(JSON.stringify(fail(passedInfo))).toEqual(JSON.stringify(expectedInvariant));
+  })
+
+  const pathTestCase = [
+    {
+      toString: () => 'path="pathA", ',
+      path: 'pathA',
+      startInvariant: fail({ message: 'fail 1' }),
+      resultInvariant: {
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathA' },
+        ]
+      } as Fail,
+    },
+    {
+      toString: () => 'path="pathA", ',
+      path: 'pathB',
+      startInvariant: {
+        ...fail({ message: 'fail 1' }),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathA' },
+        ],
+      },
+      resultInvariant: {
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathB.pathA' },
+        ]
+      } as Fail,
+    },
+    {
+      toString: () => 'path="pathA", ',
+      path: 'pathA',
+      startInvariant: {
+        ...fail({ message: 'fail 1' }),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+          { customInfo: { message: 'fail 2' } },
+          { customInfo: { message: 'fail 3' } },
+        ],
+      },
+      resultInvariant: {
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathA' },
+          { customInfo: { message: 'fail 2' }, path: 'pathA' },
+          { customInfo: { message: 'fail 3' }, path: 'pathA' },
+        ]
+      } as Fail,
+    },
+    {
+      toString: () => 'path="pathA", ',
+      path: 'pathB',
+      startInvariant: {
+        ...fail({ message: 'fail 1' }),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathA' },
+          { customInfo: { message: 'fail 2' }, path: 'pathA' },
+          { customInfo: { message: 'fail 3' }, path: 'pathA' },
+        ],
+      },
+      resultInvariant: {
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathB.pathA' },
+          { customInfo: { message: 'fail 2' }, path: 'pathB.pathA' },
+          { customInfo: { message: 'fail 3' }, path: 'pathB.pathA' },
+        ]
+      } as Fail,
+    },
+  ]
+
+  test.each(pathTestCase)('%s', ({ path, startInvariant, resultInvariant }) => {
+    startInvariant.path(path)
+    expect(JSON.stringify(startInvariant)).toStrictEqual(JSON.stringify(resultInvariant))
   })
 });

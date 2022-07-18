@@ -1,14 +1,18 @@
 import { toArray } from './utils/toArray';
 
 export interface InvariantFailCustomInfo {
-  readonly failMessage: string,
+  readonly message: string,
   readonly [key: string]: any;
 }
 
-export interface InvariantFail {
-  readonly customInfo: Array<InvariantFailCustomInfo>;
+export type InvariantFails = {
+  readonly customInfo: InvariantFailCustomInfo;
+  path?: string;
+}[]
+
+export type InvariantSuccesses = {
   readonly path?: string;
-}
+}[]
 
 export interface Success {
   readonly _tag: 'Success';
@@ -16,7 +20,8 @@ export interface Success {
 
 export interface Fail {
   readonly _tag: 'Fail';
-  readonly fail: InvariantFail;
+  readonly fail: InvariantFails;
+  readonly path: (path: string) => Fail,
 }
 
 export type Invariant = Success | Fail;
@@ -26,17 +31,27 @@ export type Invariant = Success | Fail;
  */
 export const success = (): Success => ({
   _tag: 'Success',
-} as const)
+})
 
 /**
  * Creates Fail Invariant;
  */
 export const fail = (customInfo: InvariantFailCustomInfo | InvariantFailCustomInfo[]): Fail => ({
   _tag: 'Fail',
-  fail: {
-    customInfo: new Array<InvariantFailCustomInfo>(...toArray(customInfo)),
+  fail: toArray(customInfo).map(info => ({
+    customInfo: info,
+  })),
+  path(path: string): Fail {
+    this.fail.forEach(fail => {
+      if (!fail.path) {
+        fail.path = path;
+      } else {
+        fail.path = `${path}.${fail.path}`;
+      }
+    })
+    return this
   }
-} as const)
+})
 
 /**
  * If invariant is Success:
@@ -55,4 +70,3 @@ export const isSuccess = (invariant: Invariant): invariant is Success =>
  */
 export const isFail = (invariant: Invariant): invariant is Fail =>
   invariant._tag === 'Fail';
-

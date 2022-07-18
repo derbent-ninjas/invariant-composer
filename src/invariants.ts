@@ -8,7 +8,7 @@ export const invariants = (
   const failedInvariants = allInvariants.filter(invariant => isFail(invariant)) as Fail[];
 
   if (failedInvariants.length > 0) {
-    const allFailedInfo = failedInvariants.map(invariant => invariant.fail.customInfo)
+    const allFailedInfo = failedInvariants.map(invariant => invariant.fail.map(fail => fail.customInfo))
     return fail(allFailedInfo.flat())
   } else {
     return success()

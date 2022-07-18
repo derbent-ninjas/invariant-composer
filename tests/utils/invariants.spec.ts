@@ -4,64 +4,59 @@ import { NonEmptyArray } from '../../src/nonEmptyArray';
 import { Success, success } from '../../dist/invariant';
 
 describe('invariants', () => {
-  const testCases = [
+  const failMessagesTestCases = [
+    // Fail
     {
       toString: () => '3 failed invariants - should return invariant with 3 elements in customInfo Array',
       passedInvariants: [
-        fail({ failMessage: 'fail 1' }),
-        fail({ failMessage: 'fail 2' }),
-        fail({ failMessage: 'fail 3' }),
+        fail({ message: 'fail 1' }),
+        fail({ message: 'fail 2' }),
+        fail({ message: 'fail 3' }),
       ] as NonEmptyArray<Invariant>,
       expectedInvariant: {
-        _tag: 'Fail',
-        fail: {
-          customInfo: [
-            { failMessage: 'fail 1' },
-            { failMessage: 'fail 2' },
-            { failMessage: 'fail 3' },
-          ]
-        }
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+          { customInfo: { message: 'fail 2' } },
+          { customInfo: { message: 'fail 3' } },
+        ]
       } as Fail,
     },
     {
       toString: () => '3 failed invariants, 4 succeeded - should return invariant with 3 elements in customInfo Array',
       passedInvariants: [
         success(),
-        fail({ failMessage: 'fail 1' }),
+        fail({ message: 'fail 1' }),
         success(),
-        fail({ failMessage: 'fail 2' }),
+        fail({ message: 'fail 2' }),
         success(),
-        fail({ failMessage: 'fail 3' }),
+        fail({ message: 'fail 3' }),
         success(),
       ] as NonEmptyArray<Invariant>,
       expectedInvariant: {
-        _tag: 'Fail',
-        fail: {
-          customInfo: [
-            { failMessage: 'fail 1' },
-            { failMessage: 'fail 2' },
-            { failMessage: 'fail 3' },
-          ]
-        }
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+          { customInfo: { message: 'fail 2' } },
+          { customInfo: { message: 'fail 3' } },
+        ],
       } as Fail,
     },
     {
       toString: () => '2 fails with 5 fail messages - should one invariant with 4 fail messages',
       passedInvariants: [
-        fail([{ failMessage: 'fail 1' }, { failMessage: 'fail 2' }, { failMessage: 'fail 3' }]),
-        fail([{ failMessage: 'fail 4' }, { failMessage: 'fail 5' }]),
+        fail([{ message: 'fail 1' }, { message: 'fail 2' }, { message: 'fail 3' }]),
+        fail([{ message: 'fail 4' }, { message: 'fail 5' }]),
       ] as NonEmptyArray<Invariant>,
       expectedInvariant: {
-        _tag: 'Fail',
-        fail: {
-          customInfo: [
-            { failMessage: 'fail 1' },
-            { failMessage: 'fail 2' },
-            { failMessage: 'fail 3' },
-            { failMessage: 'fail 4' },
-            { failMessage: 'fail 5' },
-          ]
-        }
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' } },
+          { customInfo: { message: 'fail 2' } },
+          { customInfo: { message: 'fail 3' } },
+          { customInfo: { message: 'fail 4' } },
+          { customInfo: { message: 'fail 5' } },
+        ]
       } as Fail,
     },
     // Success
@@ -76,7 +71,7 @@ describe('invariants', () => {
     },
   ]
 
-  test.each(testCases)('%s', ({ passedInvariants, expectedInvariant }) => {
-    expect(invariants(...passedInvariants)).toStrictEqual(expectedInvariant)
+  test.each(failMessagesTestCases)('%s', ({ passedInvariants, expectedInvariant }) => {
+    expect(JSON.stringify(invariants(...passedInvariants))).toEqual(JSON.stringify(expectedInvariant))
   })
 });
