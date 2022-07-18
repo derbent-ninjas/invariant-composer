@@ -1,4 +1,4 @@
-import { fail, isFail, isSuccess, success } from '../../src/utils/invariant';
+import { fail, isFail, isSuccess, success } from '../../src/invariant';
 
 describe('Invariant', () => {
   const testCases = [
