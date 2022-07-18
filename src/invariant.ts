@@ -1,3 +1,5 @@
+import { toArray } from './utils/toArray';
+
 export interface InvariantFailCustomInfo {
   readonly failMessage: string,
   readonly [key: string]: any;
@@ -29,10 +31,10 @@ export const success = (): Success => ({
 /**
  * Creates Fail Invariant;
  */
-export const fail = (customInfo: InvariantFailCustomInfo): Fail => ({
+export const fail = (customInfo: InvariantFailCustomInfo | InvariantFailCustomInfo[]): Fail => ({
   _tag: 'Fail',
   fail: {
-    customInfo: new Array<InvariantFailCustomInfo>(customInfo),
+    customInfo: new Array<InvariantFailCustomInfo>(...toArray(customInfo)),
   }
 } as const)
 
