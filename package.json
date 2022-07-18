@@ -1,0 +1,25 @@
+{
+  "name": "invariant-composer",
+  "version": "0.0.1",
+  "description": "Useful tools for validation by composing invariants",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derbent-ninjas/invariant-composer.git"
+  },
+  "keywords": [
+    "validation",
+    "validator",
+    "invariant",
+    "composition"
+  ],
+  "author": "@derbent-ninjas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derbent-ninjas/invariant-composer/issues"
+  },
+  "homepage": "https://github.com/derbent-ninjas/invariant-composer#readme"
+}
