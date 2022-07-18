@@ -1,7 +1,7 @@
-import { fail, isFail, isSuccess, success } from '../../src/invariant';
+import { Fail, fail, InvariantFailCustomInfo, isFail, isSuccess, success } from '../../src/invariant';
 
 describe('Invariant', () => {
-  const testCases = [
+  const predicatesTestCases = [
     {
       toString: () => 'isSuccess for Success - should return true',
       predicate: isSuccess,
@@ -28,7 +28,38 @@ describe('Invariant', () => {
     },
   ]
 
-  test.each(testCases)('%s', ({ predicate, invariant, expectedPredicateResult }) => {
+  test.each(predicatesTestCases)('%s', ({ predicate, invariant, expectedPredicateResult }) => {
     expect(predicate(invariant)).toStrictEqual(expectedPredicateResult);
+  })
+
+  const factoriesTestCases = [
+    {
+      toString: () => 'fail(object) - should properly create fail invariant',
+      passedInfo: { failMessage: 'fail 1' } as InvariantFailCustomInfo,
+      expectedInvariant: {
+        _tag: 'Fail',
+        fail: {
+          customInfo: [{
+            failMessage: 'fail 1',
+          }],
+        },
+      } as Fail,
+    },
+    {
+      toString: () => 'fail(array) - should properly create fail invariant',
+      passedInfo: [{ failMessage: 'fail 1' }] as InvariantFailCustomInfo[],
+      expectedInvariant: {
+        _tag: 'Fail',
+        fail: {
+          customInfo: [{
+            failMessage: 'fail 1',
+          }],
+        },
+      } as Fail,
+    }
+  ]
+
+  test.each(factoriesTestCases)('%s', ({ passedInfo, expectedInvariant }) => {
+    expect(fail(passedInfo)).toStrictEqual(expectedInvariant);
   })
 });
