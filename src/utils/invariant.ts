@@ -46,7 +46,7 @@ export const isSuccess = (invariant: Invariant): invariant is Success =>
 /**
  * If invariant is Fail:
  * - returns true
- * - asserts invariant type as Success
+ * - asserts invariant type as Fail
  * @param invariant
  */
 export const isFail = (invariant: Invariant): invariant is Fail =>
