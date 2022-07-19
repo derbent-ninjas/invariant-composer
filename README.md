@@ -5,7 +5,7 @@ This library provides utilities which allow you to compose validation invariants
 ----
 
 ### Get started:
-####Install:
+#### Install:
 ```
 npm install @derbent-ninjas/invariant-composer@0.0.1
 ```
