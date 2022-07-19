@@ -1,6 +1,6 @@
 {
   "name": "@derbent-ninjas/invariant-composer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Useful tools for validation by composing invariants",
   "main": "index.js",
   "scripts": {
