@@ -7,7 +7,7 @@ This library provides utilities which allow you to compose validation invariants
 ### Get started:
 #### Install:
 ```
-npm install @derbent-ninjas/invariant-composer@0.0.1
+npm install @derbent-ninjas/invariant-composer
 ```
 #### Usage:
 Create validation functions which return invariants, it can be either `fail` or `success`:
