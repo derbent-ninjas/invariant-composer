@@ -1,7 +1,12 @@
-import { Fail, fail, Invariant } from '../../src/invariant'
-import { invariants } from '../../src/invariants';
-import { NonEmptyArray } from '../../src/nonEmptyArray';
-import { Success, success } from '../../dist/invariant';
+import {
+  Fail,
+  fail,
+  Invariant,
+  invariants,
+  NonEmptyArray,
+  Success,
+  success,
+} from '../../src'
 
 describe('invariants', () => {
   const failMessagesTestCases = [
@@ -19,6 +24,22 @@ describe('invariants', () => {
           { customInfo: { message: 'fail 1' } },
           { customInfo: { message: 'fail 2' } },
           { customInfo: { message: 'fail 3' } },
+        ]
+      } as Fail,
+    },
+    {
+      toString: () => '3 failed invariants with path - should return invariant with 3 elements in customInfo Array',
+      passedInvariants: [
+        { ...fail({ message: 'fail 1' }), fail: [{ customInfo: { message: 'fail 1' }, path: 'pathA' }]},
+        { ...fail({ message: 'fail 2' }), fail: [{ customInfo: { message: 'fail 2' }, path: 'pathA' }]},
+        { ...fail({ message: 'fail 3' }), fail: [{ customInfo: { message: 'fail 3' }, path: 'pathB' }]},
+      ] as NonEmptyArray<Invariant>,
+      expectedInvariant: {
+        ...fail([{ message: 'fail 1' }]),
+        fail: [
+          { customInfo: { message: 'fail 1' }, path: 'pathA' },
+          { customInfo: { message: 'fail 2' }, path: 'pathA' },
+          { customInfo: { message: 'fail 3' }, path: 'pathB' },
         ]
       } as Fail,
     },

@@ -10,12 +10,9 @@ export type InvariantFails = {
   path?: string;
 }[]
 
-export type InvariantSuccesses = {
-  readonly path?: string;
-}[]
-
 export interface Success {
   readonly _tag: 'Success';
+  readonly path: (path: string) => Success,
 }
 
 export interface Fail {
@@ -31,7 +28,10 @@ export type Invariant = Success | Fail;
  */
 export const success = (): Success => ({
   _tag: 'Success',
-})
+  path(path: string) {
+    return this
+  }
+});
 
 /**
  * Creates Fail Invariant;
