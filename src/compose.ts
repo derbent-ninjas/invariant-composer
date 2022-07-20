@@ -1,6 +1,6 @@
 import { fail, Fail, Invariant, isFail, success } from './invariant';
 
-export const invariants = (
+export const compose = (
   firstInvariant: Invariant,
   ...restInvariants: Invariant[]
 ): Invariant => {

@@ -2,9 +2,8 @@
   "name": "@derbent-ninjas/invariant-composer",
   "version": "0.0.2",
   "description": "Useful tools for validation by composing invariants",
-  "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "test": "jest"
   },
   "repository": {
@@ -19,9 +18,6 @@
   ],
   "author": "@derbent-ninjas",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "bugs": {
     "url": "https://github.com/derbent-ninjas/invariant-composer/issues"
   },

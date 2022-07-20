@@ -2,7 +2,7 @@ import {
   Fail,
   fail,
   Invariant,
-  invariants,
+  compose,
   NonEmptyArray,
   Success,
   success,
@@ -93,6 +93,6 @@ describe('invariants', () => {
   ]
 
   test.each(failMessagesTestCases)('%s', ({ passedInvariants, expectedInvariant }) => {
-    expect(JSON.stringify(invariants(...passedInvariants))).toEqual(JSON.stringify(expectedInvariant))
+    expect(JSON.stringify(compose(...passedInvariants))).toEqual(JSON.stringify(expectedInvariant))
   })
 });

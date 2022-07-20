@@ -1,0 +1,21 @@
+# IDE
+.idea
+
+# deps
+node_modules
+
+# source
+src
+tsconfig.json
+tsconfig.build.json
+index.ts
+package-lock.json
+.eslintrc.js
+.eslintrc.json
+.eslintrc
+.prettierrc
+.commitlintrc.json
+
+
+# tests
+tests
