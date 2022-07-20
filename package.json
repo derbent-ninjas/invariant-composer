@@ -4,7 +4,7 @@
   "description": "Useful tools for validation by composing invariants",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "test": "jest"
   },
   "repository": {
