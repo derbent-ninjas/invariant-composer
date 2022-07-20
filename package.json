@@ -1,6 +1,6 @@
 {
   "name": "@derbent-ninjas/invariant-composer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Useful tools for validation by composing invariants",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
