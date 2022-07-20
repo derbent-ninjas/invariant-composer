@@ -29,9 +29,9 @@ const invariant3 = (): Invariant => {
 Then you can compose this invariants as a tree:
 ```typescript
 result(
-  invariants(
-    invariants(
-      invariants(
+  compose(
+    compose(
+      compose(
         invariant1()
       ).path('deepnessC'),
       invariant2(),
