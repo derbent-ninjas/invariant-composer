@@ -19,7 +19,8 @@
   "author": "@derbent-ninjas",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "bugs": {
     "url": "https://github.com/derbent-ninjas/invariant-composer/issues"
