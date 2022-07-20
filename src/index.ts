@@ -1,5 +1,5 @@
 export * from './invariant';
-export * from './invariants';
+export * from './compose';
 export * from './nonEmptyArray';
 export * from './result';
 export * from './types';
