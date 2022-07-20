@@ -12,13 +12,11 @@ export type InvariantFails = {
 
 export interface Success {
   readonly _tag: 'Success';
-  readonly path: (path: string) => Success,
 }
 
 export interface Fail {
   readonly _tag: 'Fail';
   readonly fail: InvariantFails;
-  readonly path: (path: string) => Fail,
 }
 
 export type Invariant = Success | Fail;
@@ -28,9 +26,6 @@ export type Invariant = Success | Fail;
  */
 export const success = (): Success => ({
   _tag: 'Success',
-  path(path: string) {
-    return this
-  }
 });
 
 /**
@@ -41,16 +36,6 @@ export const fail = (customInfo: InvariantFailCustomInfo | InvariantFailCustomIn
   fail: toArray(customInfo).map(info => ({
     customInfo: info,
   })),
-  path(path: string): Fail {
-    this.fail.forEach(fail => {
-      if (!fail.path) {
-        fail.path = path;
-      } else {
-        fail.path = `${path}.${fail.path}`;
-      }
-    })
-    return this
-  }
 })
 
 /**
