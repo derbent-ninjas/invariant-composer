@@ -29,15 +29,14 @@ const invariant3 = (): Invariant => {
 Then you can compose this invariants as a tree:
 ```typescript
 result(
-  compose(
-    compose(
-      compose(
-        invariant1()
-      ).path('deepnessC'),
-      invariant2(),
-    ).path('deepnessB'),
-    invariant3(),
-  ).path('deepnessA'),
+  path('deepnessA', compose(
+    path('deepnessA-B1', invariant1()),
+    path(
+      'deepnessA-B2',
+      compose(path('deepnessA-B2-C', invariant2()))
+    ),
+    path('deepnessA-B3', invariant3()),
+  ))
 )
 ```
 
@@ -48,8 +47,8 @@ Result:
   "status":"FAIL",
   "info": {
     "paths": {
-      "deepnessA.deepnessB.deepnessC": [{"message":"invariant 1 fails, because of something"}],
-      "deepnessA":[{"message":"invariant 3 fails, because of something"}]
+      "deepnessA.deepnessA-B2.deepnessA-B2-C":[{"message":"invariant 2 fails, because of something"}],
+      "deepnessA.deepnessA-B3":[{"message":"invariant 3 fails, because of something"}]
     }
   }
 }
