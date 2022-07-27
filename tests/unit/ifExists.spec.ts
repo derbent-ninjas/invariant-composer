@@ -1,5 +1,4 @@
-import { fail, success } from '../../src';
-import { ifExists } from '../../src/ifExists';
+import { fail, success, ifExists } from '../../src';
 
 describe('ifExists', () => {
   const testCases = [

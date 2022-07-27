@@ -5,4 +5,5 @@ export * from './display';
 export * from './types';
 export * from './enums';
 export * from './path';
+export * from './ifExists';
 
