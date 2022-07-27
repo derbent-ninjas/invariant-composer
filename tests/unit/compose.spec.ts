@@ -8,7 +8,7 @@ import {
   success,
 } from '../../src'
 
-describe('invariants', () => {
+describe('compose', () => {
   const failMessagesTestCases = [
     // Fail
     {

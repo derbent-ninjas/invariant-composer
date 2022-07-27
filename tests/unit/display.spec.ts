@@ -1,8 +1,8 @@
 import { success, fail } from '../../src';
 import { FailResult, SuccessResult } from '../../src';
-import { result } from '../../src';
+import { display } from '../../src';
 
-describe('result', () => {
+describe('display', () => {
   const testCases = [
     // Fail
     {
@@ -55,6 +55,6 @@ describe('result', () => {
   ]
 
   test.each(testCases)('%s', ({ invariant, expectedResult }) => {
-    expect(result(invariant)).toEqual(expectedResult)
+    expect(display(invariant)).toEqual(expectedResult)
   })
 });

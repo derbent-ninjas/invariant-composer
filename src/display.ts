@@ -1,7 +1,7 @@
 import { Invariant, isSuccess } from './invariant';
 import { FailResult, Result } from './types';
 
-export const result = (invariant: Invariant): Result => {
+export const display = (invariant: Invariant): Result => {
   if (isSuccess(invariant)) {
     return {
       status: 'SUCCESS',
