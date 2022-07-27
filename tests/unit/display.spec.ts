@@ -1,5 +1,5 @@
 import { success, fail } from '../../src';
-import { FailResult, SuccessResult } from '../../src';
+import { FailDisplay, SuccessDisplay } from '../../src';
 import { display } from '../../src';
 
 describe('display', () => {
@@ -42,7 +42,7 @@ describe('display', () => {
             { message: 'fail 9' },
           ]
         },
-      } as FailResult,
+      } as FailDisplay,
     },
     // Success
     {
@@ -50,7 +50,7 @@ describe('display', () => {
       invariant: success(),
       expectedResult: {
         status: 'SUCCESS',
-      } as SuccessResult,
+      } as SuccessDisplay,
     },
   ]
 

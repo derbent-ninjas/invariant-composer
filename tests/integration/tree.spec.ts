@@ -1,4 +1,4 @@
-import { compose, display, success, fail, SuccessResult, path, FailResult } from '../../src';
+import { compose, display, success, fail, SuccessDisplay, path, FailDisplay } from '../../src';
 
 describe('Integration of compose methods and invariants', () => {
   const testCases = [
@@ -16,7 +16,7 @@ describe('Integration of compose methods and invariants', () => {
       ),
       expectedResult: {
         status: 'SUCCESS',
-      } as SuccessResult,
+      } as SuccessDisplay,
     },
     {
       toString: () => '1: fail - should properly create result',
@@ -37,7 +37,7 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2.deepnessA-B2-C': [{ message: 'fail 1' }]
           }
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '2: fail - should properly create result',
@@ -59,7 +59,7 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2.deepnessA-B2-C': [{ message: 'fail 2' }],
           }
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '3: fail - should properly create result',
@@ -85,7 +85,7 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2': [{ message: 'fail 3' }],
           },
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '3: fail - should properly create result',
@@ -103,7 +103,7 @@ describe('Integration of compose methods and invariants', () => {
             { message: 'fail 2' },
           ],
         },
-      } as FailResult,
+      } as FailDisplay,
     }
   ]
 
