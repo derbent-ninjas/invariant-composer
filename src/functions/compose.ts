@@ -1,5 +1,13 @@
 import { fail, Fail, Invariant, isFail, success } from './invariant';
 
+/**
+ * Composes All invariants into one invariant,
+ * if any invariant will fail,
+ * result invariant will be failed.
+ *
+ * @param firstInvariant
+ * @param restInvariants
+ */
 export const compose = (
   firstInvariant: Invariant,
   ...restInvariants: Invariant[]

@@ -1,10 +1,10 @@
-import { compose, result, success, fail, SuccessResult, path, FailResult } from '../../src';
+import { compose, display, success, fail, SuccessDisplay, path, FailDisplay } from '../../src';
 
 describe('Integration of compose methods and invariants', () => {
   const testCases = [
     {
       toString: () => 'success - should properly create result',
-      tree: result(
+      tree: display(
         path('deepnessA', compose(
           path('deepnessA-B1', success()),
           path(
@@ -16,11 +16,11 @@ describe('Integration of compose methods and invariants', () => {
       ),
       expectedResult: {
         status: 'SUCCESS',
-      } as SuccessResult,
+      } as SuccessDisplay,
     },
     {
       toString: () => '1: fail - should properly create result',
-      tree: result(
+      tree: display(
         path('deepnessA', compose(
           path('deepnessA-B1', success()),
           path(
@@ -37,11 +37,11 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2.deepnessA-B2-C': [{ message: 'fail 1' }]
           }
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '2: fail - should properly create result',
-      tree: result(
+      tree: display(
         path('deepnessA', compose(
           path('deepnessA-B1', fail({ message: 'fail 1'})),
           path(
@@ -59,11 +59,11 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2.deepnessA-B2-C': [{ message: 'fail 2' }],
           }
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '3: fail - should properly create result',
-      tree: result(
+      tree: display(
         path('deepnessA', compose(
           path('deepnessA-B1', fail({ message: 'fail 1'})),
           path(
@@ -85,11 +85,11 @@ describe('Integration of compose methods and invariants', () => {
             'deepnessA.deepnessA-B2': [{ message: 'fail 3' }],
           },
         }
-      } as FailResult,
+      } as FailDisplay,
     },
     {
       toString: () => '3: fail - should properly create result',
-      tree: result(
+      tree: display(
         compose(
           fail({ message: 'fail 1' }),
           compose(fail({ message: 'fail 2' })),
@@ -103,7 +103,7 @@ describe('Integration of compose methods and invariants', () => {
             { message: 'fail 2' },
           ],
         },
-      } as FailResult,
+      } as FailDisplay,
     }
   ]
 

@@ -1,8 +1,6 @@
-import { success, fail } from '../../src';
-import { FailResult, SuccessResult } from '../../src';
-import { result } from '../../src';
+import { display, success, fail, FailDisplay, SuccessDisplay } from '../../src';
 
-describe('result', () => {
+describe('display', () => {
   const testCases = [
     // Fail
     {
@@ -42,7 +40,7 @@ describe('result', () => {
             { message: 'fail 9' },
           ]
         },
-      } as FailResult,
+      } as FailDisplay,
     },
     // Success
     {
@@ -50,11 +48,11 @@ describe('result', () => {
       invariant: success(),
       expectedResult: {
         status: 'SUCCESS',
-      } as SuccessResult,
+      } as SuccessDisplay,
     },
   ]
 
   test.each(testCases)('%s', ({ invariant, expectedResult }) => {
-    expect(result(invariant)).toEqual(expectedResult)
+    expect(display(invariant)).toEqual(expectedResult)
   })
 });

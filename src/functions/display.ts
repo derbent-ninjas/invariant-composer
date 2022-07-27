@@ -1,13 +1,17 @@
 import { Invariant, isSuccess } from './invariant';
-import { FailResult, Result } from './types';
+import { FailDisplay, Display } from '../types';
 
-export const result = (invariant: Invariant): Result => {
+/**
+ * Converts invariant to informative object
+ * @param invariant
+ */
+export const display = <I extends Invariant>(invariant: I): Display<typeof invariant> => {
   if (isSuccess(invariant)) {
     return {
       status: 'SUCCESS',
-    }
+    } as Display<typeof invariant>
   } else {
-    const info = invariant.fail.reduce((info: FailResult['info'], fail) => {
+    const info = invariant.fail.reduce((info: FailDisplay['info'], fail) => {
       if (!fail.path) {
         if (!info.errorsWithoutPath) {
           info.errorsWithoutPath = [fail.customInfo];
@@ -32,6 +36,6 @@ export const result = (invariant: Invariant): Result => {
     return {
       status: 'FAIL',
       info,
-    }
+    } as Display<typeof invariant>
   }
 }
