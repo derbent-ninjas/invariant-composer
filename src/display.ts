@@ -1,6 +1,10 @@
 import { Invariant, isSuccess } from './invariant';
 import { FailDisplay, Display } from './types';
 
+/**
+ * Converts invariant to informative object
+ * @param invariant
+ */
 export const display = <I extends Invariant>(invariant: I): Display<typeof invariant> => {
   if (isSuccess(invariant)) {
     return {

@@ -1,5 +1,10 @@
 import { toArray } from './utils/toArray';
 
+/**
+ * You must pass error message.
+ *
+ * You also can pass any other additional information if you need to.
+ */
 export interface InvariantFailCustomInfo {
   readonly message: string,
   readonly [key: string]: any;
@@ -10,10 +15,16 @@ export type InvariantFails = {
   path?: string;
 }[]
 
+/**
+ * Success Invariant
+ */
 export interface Success {
   readonly _tag: 'Success';
 }
 
+/**
+ * Fail Invariant
+ */
 export interface Fail {
   readonly _tag: 'Fail';
   readonly fail: InvariantFails;
