@@ -1,5 +1,5 @@
 import { Invariant, isSuccess } from './invariant';
-import { FailDisplay, Display } from './types';
+import { FailDisplay, Display } from '../types';
 
 /**
  * Converts invariant to informative object

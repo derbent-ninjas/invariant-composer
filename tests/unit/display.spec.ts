@@ -1,6 +1,4 @@
-import { success, fail } from '../../src';
-import { FailDisplay, SuccessDisplay } from '../../src';
-import { display } from '../../src';
+import { display, success, fail, FailDisplay, SuccessDisplay } from '../../src';
 
 describe('display', () => {
   const testCases = [

@@ -1,5 +1,4 @@
-import { Fail, fail } from '../../src';
-import { path as pathUtility } from '../../src/path';
+import { Fail, fail, path as pathUtility } from '../../src';
 
 describe('path', () => {
   const testCases = [
