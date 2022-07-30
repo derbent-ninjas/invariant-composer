@@ -1,4 +1,4 @@
-import { Guard, Invariant, INVARIANT_HAS_FAILED, InvariantError, success, fail } from '../../src';
+import { Guard, Invariant, INVARIANT_HAS_FAILED, InvariantError, success, fail } from '../../../src';
 
 const successCanActivateFunction = (): Invariant => {
   return success();

@@ -1,5 +1,5 @@
-import { InvariantError, fail } from '../../src';
-import { isInvariantError } from '../../src';
+import { InvariantError, fail } from '../../../src';
+import { isInvariantError } from '../../../src';
 
 describe('isInvariantError', () => {
   const testCases = [

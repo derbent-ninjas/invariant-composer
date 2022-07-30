@@ -1,4 +1,4 @@
-import { fail, InvariantFailCustomInfo, isFail, isSuccess, success } from '../../src';
+import { fail, InvariantFailCustomInfo, isFail, isSuccess, success } from '../../../src';
 
 describe('Invariant', () => {
   const predicatesTestCases = [
