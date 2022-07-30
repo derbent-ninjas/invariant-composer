@@ -6,7 +6,7 @@ import {
   NonEmptyArray,
   Success,
   success,
-} from '../../src'
+} from '../../../src'
 
 describe('compose', () => {
   const failMessagesTestCases = [

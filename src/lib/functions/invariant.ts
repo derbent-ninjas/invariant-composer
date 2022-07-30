@@ -1,4 +1,4 @@
-import { toArray } from '../sharedForUse/utils/toArray';
+import { toArray } from '../../shared/utils/toArray';
 
 /**
  * You must pass error message.

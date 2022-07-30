@@ -1,4 +1,4 @@
-import { Invariant, InvariantFailCustomInfo, Success } from '../';
+import { Invariant, InvariantFailCustomInfo, Success } from '../../index';
 
 export interface SuccessDisplay {
   status: 'SUCCESS'

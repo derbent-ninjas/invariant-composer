@@ -28,7 +28,7 @@ const invariant3 = (): Invariant => {
 
 Then you can compose this invariants as a tree:
 ```typescript
-result(
+display(
   path('deepnessA', compose(
     path('deepnessA-B1', invariant1()),
     path(
@@ -56,6 +56,60 @@ Result:
 Looks simple, doesn't it?
 
 -----
+
+### More functions:
+
+-----
+### ifExists
+
+#### `ifExists<T>(property: T, invariantFn: (property: T) => Invariant)`
+Executes invariant function only if passed value is not undefined. Otherwise, returns success() invariant.
+
+```typescript
+ifExists(name, isNameValid)
+```
+
+-----
+### assert
+
+#### `assert(path: string, invariant: Invariant)`
+
+throw `InvariantError` if passed invariant is fail.
+
+```typescript
+const canCreateName = fail({ message: 'name is not valid' });
+assert('name', canCreateName);
+```
+
+-----
+### isInvariantError
+
+#### `isInvariantError(value: any)`
+returns true is passed value is invariant error.
+
+```typescript
+isInvariantError(error)
+```
+
+-----
+### Guard
+
+#### `@Guard(canActivateFn: (*arguments of decorated function*) => Invariant)`
+Decorator which throws an `InvariantError` if passedCanActivate function returned fail invariant.
+
+```typescript
+class Cat {
+  name: string;
+  
+  @Guard(canSetName)
+  setName(newName: string) {
+    this.name = newName;
+  }
+}
+```
+
+-----
+
 
 ### LICENCE:
 

@@ -1,4 +1,4 @@
-import { success, assert, fail, path, InvariantError, INVARIANT_HAS_FAILED } from '../../src';
+import { success, assert, fail, path, InvariantError, INVARIANT_HAS_FAILED } from '../../../src';
 
 describe('assert', () => {
   const notThrowsTestCases = [
@@ -37,7 +37,6 @@ describe('assert', () => {
   test.each(throwsAndSetsPathTestCases)('%s', ({ path, invariant, expectedInvariant }) => {
     try {
       assert(path, invariant)
-      throw new Error('method must throw')
       // @ts-ignore
     } catch (error: InvariantError) {
       expect(error.invariant).toEqual(expectedInvariant)
