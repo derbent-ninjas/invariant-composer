@@ -31,7 +31,7 @@ export function Guard(canActivateFn: (...args: any[]) => Invariant): MethodDecor
 }
 
 const assertIsInvariant = (candidate: any) => {
-  if (isInvariant(candidate)) {
+  if (!isInvariant(candidate)) {
     throw new Error('@Guard decorator, canActivate function did not return invariant')
   }
 }
