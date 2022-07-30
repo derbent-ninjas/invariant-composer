@@ -4,7 +4,7 @@
   "description": "Useful tools for validation by composing invariants",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
-    "publish": "npm publish --access=public && npm publish --access=public --@derbent-ninjas:registry=https://registry.npmjs.org",
+    "publish": "npm publish --access=public",
     "test": "jest"
   },
   "repository": {
