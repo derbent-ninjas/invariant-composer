@@ -1,5 +1,6 @@
 import { Invariant } from '../functions';
 import { assert } from './assert';
+import { lowercaseFirstChar } from '../../shared/utils/lowercaseFirstChar';
 
 export function Guard(canActivateFn: (...args: any[]) => Invariant): MethodDecorator {
   return function (
@@ -11,7 +12,7 @@ export function Guard(canActivateFn: (...args: any[]) => Invariant): MethodDecor
 
     descriptor.value = function (...args: any[]) {
       const canActivate = canActivateFn(...args);
-      assert(target.constructor.name, canActivate);
+      assert(lowercaseFirstChar(target.constructor.name), canActivate);
 
       return oldMethod.apply(this, args)
     }
